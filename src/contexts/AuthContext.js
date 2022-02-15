@@ -1,15 +1,20 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import axios from '../config/axios'
-import { setToken, clearToken } from '../services/localStorage'
-import jwtDecode from 'jwt-decode';
-import { ErrorContext } from './ErrorContext';
+import { setToken, clearToken, getToken } from '../services/localStorage'
 
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
     const [user, setUser] = useState(null);
-    const { setError } = useContext(ErrorContext)
+
+    useEffect(() => {
+        if (getToken()) {
+            axios.get('/users/me')
+                .then(res => setUser(res.data.user))
+                .catch(err => console.log(err));
+        }
+    }, [])
 
     const login = async (emailOrPhoneNumber, password) => {
         try {
@@ -19,9 +24,8 @@ function AuthContextProvider({ children }) {
                 password
             })
 
-            const token = res.data.token;
-            setToken(token);
-            setUser(jwtDecode(token));
+            setToken(res.data.token);
+            setUser(res.data.user);
 
         } catch (err) {
 
@@ -32,8 +36,12 @@ function AuthContextProvider({ children }) {
         clearToken();
         setUser(null);
     }
+
+    const updateUser = value => {
+        setUser(prev => ({ ...prev, ...value }))
+    }
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, updateUser }}>
             {children}
         </AuthContext.Provider>
     )

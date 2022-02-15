@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import PublicLayout from '../components/layout/PublicLayout';
 import Login from '../Page/Login';
 import Register from '../Page/Register';
@@ -14,15 +14,18 @@ function RouteConfig() {
 
     return (
         <Routes>
-            {user === null ? (
-                <Route path="/" element={<PublicLayout />}>
-                    <Route path="" element={<Login />} />
-                    <Route path="register" element={<Register />} />
-                </Route>
-            ) : (
+            {user ? (
                 <Route path="/" element={<MainLayout />}>
                     <Route path="" element={<Home />} />
                     <Route path="friend" element={<Friend />} />
+                    <Route path="*" element={<Navigate to='/' />} />
+                </Route>
+
+            ) : (
+                <Route path="/" element={<PublicLayout />}>
+                    <Route path="" element={<Login />} />
+                    <Route path="register" element={<Register />} />
+                    <Route path="register" element={<Navigate to='/' />} />
                 </Route>
             )}
         </Routes>
