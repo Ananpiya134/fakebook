@@ -5,20 +5,26 @@ import Register from '../Page/Register';
 import MainLayout from '../components/layout/MainLayout';
 import Home from '../Page/Home'
 import Friend from '../Page/Friend';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 function RouteConfig() {
+    const { user } = useContext(AuthContext);
+    console.log(user)
+
     return (
         <Routes>
-            <Route path="/" element={<PublicLayout />}>
-                <Route path="" element={<Login />} />
-                <Route path="register" element={<Register />} />
-            </Route>
-
-            {/* <Route path="/" element={<MainLayout />}>
-                <Route path="" element={<Home />} />
-                <Route path="friend" element={<Friend />} />
-
-            </Route> */}
+            {user === null ? (
+                <Route path="/" element={<PublicLayout />}>
+                    <Route path="" element={<Login />} />
+                    <Route path="register" element={<Register />} />
+                </Route>
+            ) : (
+                <Route path="/" element={<MainLayout />}>
+                    <Route path="" element={<Home />} />
+                    <Route path="friend" element={<Friend />} />
+                </Route>
+            )}
         </Routes>
     )
 }

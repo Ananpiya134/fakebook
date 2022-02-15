@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import { useContext } from 'react'
+import AuthContext from '../../contexts/AuthContext'
+
+
 
 function Header() {
+
+    const { logout } = useContext(AuthContext);
 
     return (
         <nav className="navbar navbar-expand-sm sticky-top bg-white text-facebook">
@@ -24,7 +30,10 @@ function Header() {
                             </Link>
                         </li>
                         <li className="nav-item mx-5">
-                            <div className="nav-link" role="button">
+                            <div className="nav-link" role="button"
+                                onClick={() => console.log(logout)}
+                            // onClick={() => console.log('logout')}
+                            >
                                 <i className="fas fa-sign-out-alt fs-2"></i>
                             </div>
                         </li>

@@ -19,7 +19,7 @@ function RegisterForm() {
         e.preventDefault();
         try {
             setError('')
-            const res = await axios.post('/user/register', {
+            const res = await axios.post('/users/register', {
                 firstName,
                 lastName,
                 emailOrPhoneNumber,
@@ -28,8 +28,7 @@ function RegisterForm() {
             });
             navigate('/');
         } catch (err) {
-            console.log(err.message)
-            setError(err.message);
+            setError(err.response.data.message);
         }
     };
 

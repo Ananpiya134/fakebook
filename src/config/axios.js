@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_URL } from './env';
 import { getToken } from '../services/localStorage'
 
-axios.default.baseURL = API_URL;
+axios.defaults.baseURL = API_URL;
 
 axios.interceptors.request.use(
     config => {
