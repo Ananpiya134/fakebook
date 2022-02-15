@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import styles from '../../Auth.module.css';
 
 function LoginForm() {
+    const navigate = useNavigate();
 
     return (
         <form className={styles['login-form']}>
@@ -27,7 +29,11 @@ function LoginForm() {
             <div className="text-center pt-3 pb-3">
                 {/* <a href="/">Forgotten password?</a> */}
                 <hr />
-                <button type="button" className="btn btn-success btn-lg mt-3">
+                <button
+                    type="button"
+                    className="btn btn-success btn-lg mt-3"
+                    onClick={() => navigate('/register')}
+                >
                     Create New Account
                 </button>
             </div>
