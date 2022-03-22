@@ -1,10 +1,16 @@
 import PostCard from "./PostCard";
 
-function PostList() {
+function PostList({ posts }) {
     return (
         <>
-            <PostCard />
-            <PostCard />
+            {posts.map(item => {
+                return (
+                    <PostCard
+                        key={item.id}
+                        post={item}
+                    />)
+            })}
+            {/* <PostCard /> */}
         </>
     )
 }

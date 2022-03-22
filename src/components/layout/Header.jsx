@@ -23,7 +23,6 @@ function Header() {
         modalObj.show();
     }
 
-    console.log(user);
 
     const handleClickUpdate = async () => {
         try {

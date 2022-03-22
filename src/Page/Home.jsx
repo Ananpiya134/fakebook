@@ -9,7 +9,6 @@ function Home() {
                 <div className="row d-flex align-items-center justify-content-center">
                     <div className="col-lg-6 col-md-9">
                         <PostWrapper />
-                        <PostList />
 
 
                     </div>

@@ -1,21 +1,33 @@
-function PostHeader() {
+import defaultImg from '../../assets/images/defaultProfilePic.png'
+import timeSince from '../../services/timeSince';
+
+
+function PostHeader({ post: {
+    User: {
+        firstName,
+        lastName,
+        profileImg
+    },
+    createdAt
+} }) {
 
     return (
         <>
             <div className="d-flex justify-content-between py-2 px-3">
                 <div className="d-flex flex-row align-items-center">
                     <img
-                        src="https://i.imgur.com/pBcut2e.jpeg"
+                        src={profileImg ?? defaultImg}
                         width="50"
+                        height="50"
                         className="rounded-circle"
                         alt="user"
                         role="button"
                     />
                     <div className="d-flex flex-column ms-2">
                         <span className="fw-bold text-facebook" role="button">
-                            John Doe
+                            {firstName} {lastName}
                         </span>
-                        <small className="text-muted fs-7">Today at 11.33</small>
+                        <small className="text-muted fs-7">{timeSince(createdAt)}</small>
                     </div>
                 </div>
                 <div className="mt-1 text-muted">
