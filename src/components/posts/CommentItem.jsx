@@ -1,32 +1,36 @@
-function CommentItem() {
+import defaultImg from "../../assets/images/defaultProfilePic.png";
+import timeSince from "../../services/timeSince";
 
-    return (
-        <>
-            <div className="d-flex flex-row mb-3">
-                <img
-                    src="https://i.imgur.com/9AZ2QX1.jpg"
-                    width="30"
-                    height="30"
-                    className="rounded-circle"
-                    alt="user"
-                />
-                <div className="d-flex flex-column ms-2">
-                    <div>
-                        <span className="fw-bold text-facebook">
-                            Sarah Jane
-                        </span>
-                        <span className="ms-2 text-muted fw-bolder">
-                            &bull;
-                        </span>
-                        <span className="ms-2 text-muted fs-7">
-                            4 hours ago
-                        </span>
-                    </div>
-                    <span>I like this alot! thanks alot</span>
-                </div>
-            </div>
-        </>
-    );
+function CommentItem({
+	comment: {
+		title,
+		User: { profileImg, firstName, lastName },
+		createdAt,
+	},
+}) {
+	return (
+		<>
+			<div className="d-flex flex-row mb-3">
+				<img
+					src={profileImg ?? defaultImg}
+					width="30"
+					height="30"
+					className="rounded-circle"
+					alt="user"
+				/>
+				<div className="d-flex flex-column ms-2">
+					<div>
+						<span className="fw-bold text-facebook">
+							{firstName} {lastName}{" "}
+						</span>
+						<span className="ms-2 text-muted fw-bolder">&bull;</span>
+						<span className="ms-2 text-muted fs-7">{timeSince(createdAt)}</span>
+					</div>
+					<span>{title}</span>
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default CommentItem;

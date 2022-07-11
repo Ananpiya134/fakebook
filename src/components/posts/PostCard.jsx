@@ -8,7 +8,7 @@ function PostCard({ post }) {
 			<div className="card my-3">
 				<PostHeader post={post} />
 				<PostContent post={post} />
-				<PostFooter />
+				<PostFooter post={post} />
 			</div>
 		</>
 	);
